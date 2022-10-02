@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lwcms.springdatasources.mapper.UserMapper">
+<!--    添加用户-->
+    <insert id="addUser" parameterType="org.lwcms.springdatasources.entry.User">
+        insert into tb_user(user_login_name,user_password,user_create_time,user_login_time,user_name) values(#{user.getUser_login_name},#{user.getUser_password},#{user.getUser_create_time},#{user.getUser_login_time},#{user.getUser_name})
+    </insert>
+<!--   条件查询-->
+    <select id="conditionQueryUser" parameterType="org.lwcms.springdatasources.entry.User" resultType="org.lwcms.springdatasources.entry.User">
+        select * from tb_user
+        <where>
+            <if test="user.user_login_name !=null and user.user_login_name !='' ">
+                and user_login_name=#{user.user_login_name}
+            </if>
+            <choose>
+                <when test="user.user_status==1">
+                    <if test="startTime !=null">
+                        and user_create_time <![CDATA[>=]]> #{startTime}
+                    </if>
+                    <if test="endTime !=null">
+                        and user_create_time <![CDATA[<=]]> #{endTime}
+                    </if>
+                </when>
+                <when test="user.user_status==2">
+                    <if test="startTime !=null">
+                        and user_login_time <![CDATA[>=]]> #{startTime}
+                    </if>
+                    <if test="endTime !=null">
+                        and user_login_time <![CDATA[<=]]> #{endTime}
+                    </if>
+                </when>
+            </choose>
+            <if test="user.user_login_time !=null">
+                and user_login_time=#{user.user_login_time}
+            </if>
+            <if test="user.user_name !=null and user.user_name !='' ">
+                and user_name=#{user.user_name}
+            </if>
+        </where>
+    </select>
+</mapper> 
