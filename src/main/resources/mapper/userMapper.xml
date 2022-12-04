@@ -21,4 +21,8 @@
             </if>
         </where>
     </select>
+<!--    用户登录-->
+    <select id="login" parameterType="org.lwcms.springdatasources.entry.User" resultType="org.lwcms.springdatasources.entry.User">
+        select * from tb_user where user_login_name=#{user.user_login_name} and user_password=#{user.user_password}
+    </select>
 </mapper> 

@@ -39,6 +39,6 @@ public interface UserMapper {
      * @param user
      * @return int
      */
-    int login(@Param("user")User user);
+    User login(@Param("user")User user);
 
 }
