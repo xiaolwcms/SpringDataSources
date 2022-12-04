@@ -2,6 +2,7 @@ package org.lwcms.springdatasources.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.lwcms.springdatasources.dto.UserDTO;
 import org.lwcms.springdatasources.entry.User;
 
 import java.sql.Date;
@@ -19,10 +20,10 @@ public interface UserMapper {
      * @Description 查询用户信息-条件查询
      * @author lwcms
      * @date 2022/9/27 20:22
-     * @param user
+     * @param userDTO
      * @return list
      */
-    List<User> conditionQueryUser(@Param("user") User user, @Param("startTime")Date startTime, @Param("endTime")Date endTime);
+    List<User> conditionQueryUser(@Param("userDTO") UserDTO userDTO);
     /**
      * @Description 注册新用户
      * @author lwcms

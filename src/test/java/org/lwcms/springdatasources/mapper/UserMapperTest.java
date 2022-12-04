@@ -1,8 +1,10 @@
 package org.lwcms.springdatasources.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lwcms.springdatasources.SpringDataSourcesApplication;
+import org.lwcms.springdatasources.dto.UserDTO;
 import org.lwcms.springdatasources.entry.User;
 import org.lwcms.springdatasources.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +33,27 @@ public class UserMapperTest {
      */
     @Test
     public void  conditionQueryUser(){
-        User user=new User();
-//        user.setUser_login_time(Date.valueOf("2022-02-01"));
-        user.setUser_status(1);
-        String startTime="2022-02-02";
-        String endTime="2022-02-02";
-        List<User> userList=userMapper.conditionQueryUser(user,Date.valueOf(startTime),Date.valueOf(endTime));
+        UserDTO userDTO=new UserDTO();
+        userDTO.setUser_type("admin");
+        List<User> userList=userMapper.conditionQueryUser(userDTO);
         for(User u:userList){
             System.out.println(u);
         }
+    }
+    /**
+     * @Description 注册新用户
+     * @author lwcms
+     * @date 2022/9/27 20:23
+     * @return list
+     */
+    @Test
+    public void  addUser(){
+        User user=new User();
+        user.setUser_login_name("admin");
+        user.setUser_password("admin");
+        user.setUser_type("admin");
+        user.setUser_name("超级管理员");
+        System.out.println(userMapper.addUser(user));
     }
     /**
      * @Description 用于单元测试

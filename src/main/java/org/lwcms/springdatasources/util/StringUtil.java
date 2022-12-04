@@ -64,4 +64,22 @@ public class StringUtil {
         }
         return resultStr;
     }
+    /**
+     * @Description 讲输入的字符串按照指定格式输出
+     * @author lwcms
+     * @date 2022/9/15 22:15
+     * @param   inputStr 需要处理的字符串
+     * @param   splitStr 指定分割符
+     * @param   resultFormat 指定格式
+     * @return 返回处理之后的字符串
+     */
+    public static void inputFormat(String inputStr,String splitStr,String resultFormat){
+        //将字符串分割成数组
+        String[] strings=inputStr.split(splitStr);
+        StringBuilder stringBuilder=new StringBuilder();
+        for(String str:strings){
+            stringBuilder.append(str).append(resultFormat);
+        }
+        System.out.println(stringBuilder.toString());
+    }
 }
